@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>     * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        overflow-x: hidden;
+    }
+
+    nav {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+    }
+
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-item a {
+        color: #333;
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background: #fff;
+        min-width: 200px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+
+    .nav-item:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        padding: 0.75rem 1rem;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background: #f8f9fa;
+    }
+     .hamburger {   display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: #333;
+        margin: 5px 0;
+    }
+
+    .nav-icons {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .search-container {
+        position: relative;
+    }
+
+    .search-container input {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+    }
+
+    .search-container i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    .icon-btn {
+        color: #333;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .cart-count {
+        background: #e74c3c;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 50%;
+        font-size: 0.75rem;
+    }
+
+    /* Large Screens */
+    @media (min-width: 1200px) {
+        .nav-container {
+            padding: 1rem 2rem;
+        }
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        .nav-links {
+            gap: 1rem;
+        }
+
+        .search-container input {
+            width: 150px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            flex-direction: column;
+            gap: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-item {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-item>a {
+            padding: 1rem;
+            display: block;
+        }
+
+        .dropdown-content {
+            position: static;
+            box-shadow: none;
+            background: #f8f9fa;
+            width: 100%;
+        }
+
+        .dropdown-content a {
+            padding-left: 2rem;
+        }
+
+        .search-container {
+            display: none;
+        }
+
+        .nav-icons {
+            gap: 1rem;
+        }
+
+        .icon-btn span:not(.cart-count) {
+            display: none;
+        }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 480px) {
+        .logo {
+            font-size: 1.8rem;
+        }
+
+        .nav-container {
+            padding: 0.75rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">LuxeWear</a>
+
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#">Women</a>
+                    <div class="dropdown-content">
+                        <a href="women explore.html">New Arrivals</a>
+                        <a href="dresses.html">Dresses</a>
+                        <a href="tops.html">Tops</a>
+                        <a href="bottom.html">Bottoms</a>
+                        <a href="accessories.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Men</a>
+                    <div class="dropdown-content">
+                        <a href="menexplore.html">New Arrivals</a>
+                        <a href="shirts.html">Shirts</a>
+                        <a href="pants.html">Pants</a>
+                        <a href="suits.html">Suits</a>
+                        <a href="accessioriesmen.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Kids</a>
+                    <div class="dropdown-content">
+                        <a href="kidsdresses.html">Dreeses</a>
+                        <a href="kidsshirts.html">Shirts</a>
+                        <a href="kidspants.html">Pants</a>
+                        <a href="kidsshoes.html">Shoes</a>
+                        <a href="kidsaccessories.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Sale</a>
+                    <div class="dropdown-content">
+                        <a href="womensale.html">Women's Sale</a>
+                        <a href="mensale.html">Men's Sale</a>
+                        <a href="kidssale.html">Kids' Sale</a>
+                        <a href="clearance.html">Clearance</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-icons">
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <a href="luxewear-login.html" class="icon-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+                <a href="cart-page.html" class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+
+                </a>
+
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

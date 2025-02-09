@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Home Page  |  LuxeWear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+nav {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.5rem;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.nav-item:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    padding: 0.75rem 1rem;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background: #f8f9fa;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #333;
+    margin: 5px 0;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.search-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.icon-btn {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-count {
+    background: #e74c3c;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.75rem;
+}
+
+/* Large Screens */
+@media (min-width: 1200px) {
+    .nav-container {
+        padding: 1rem 2rem;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    .search-container input {
+        width: 150px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-item > a {
+        padding: 1rem;
+        display: block;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background: #f8f9fa;
+        width: 100%;
+    }
+
+    .dropdown-content a {
+        padding-left: 2rem;
+    }
+
+    .search-container {
+        display: none;
+    }
+
+    .nav-icons {
+        gap: 1rem;
+    }
+
+    .icon-btn span:not(.cart-count) {
+        display: none;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.8rem;
+    }
+    
+    .nav-container {
+        padding: 0.75rem;
+    }
+}
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 12px 30px;
+    background: #2c3e50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.categories {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.category-card {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.9);
+    padding: 1rem;
+    text-align: center;
+}
+
+.featured-products {
+    background: #f8f9fa;
+    padding: 4rem 2rem;
+}
+
+.product-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.product-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.cta-section {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .categories, .featured-products {
+        padding: 2rem 1rem;
+    }
+}
+.benefits {
+    padding: 4rem 1rem;
+    background: #fff;
+}
+
+.benefits-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.benefit-card i {
+    font-size: 2.5rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.trending {
+    padding: 4rem 1rem;
+    background: #f8f9fa;
+}
+
+.trending-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #666;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+}
+
+.reviews {
+    padding: 4rem 1rem;
+    background: #fff;
+}
+
+.review-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.review-card {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.reviewer-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.stars {
+    color: #f1c40f;
+    margin-bottom: 0.5rem;
+}
+
+.instagram-feed {
+    padding: 4rem 1rem;
+}
+
+.instagram-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.instagram-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.instagram-item img {
+    width: 1200px;
+    height: 1200px;
+    object-fit: cover;
+}
+
+.instagram-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.instagram-item:hover .instagram-overlay {
+    opacity: 1;
+}
+
+.instagram-overlay i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.size-guide {
+    background: #fff;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.size-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.size-table th,
+.size-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.size-table th {
+    background: #f8f9fa;
+}
+
+.brand-banner {
+    padding: 3rem 1rem;
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+}
+
+.brand-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    align-items: center;
+}
+
+.brand-logo {
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+    .trending-tabs {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .size-table {
+        font-size: 0.9rem;
+    }
+}
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 4rem 2rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #3498db;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    color: white;
+    background: rgba(255,255,255,0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: #3498db;
+    transform: translateY(-3px);
+}
+
+.contact-info {
+    margin-top: 1rem;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    color: #ecf0f1;
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.payment-methods {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.payment-methods i {
+    font-size: 2rem;
+    color: #ecf0f1;
+}
+
+.app-download {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.app-button {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.app-button:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .contact-info p {
+        justify-content: center;
+    }
+
+    .app-download {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+/* Navigation Dropdown */
+.dropdown-content {
+    transform: translateY(15px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.nav-item:hover .dropdown-content {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-content a {
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    position: relative;
+    background: transparent;
+}
+
+.dropdown-content a:hover {
+    background: rgba(52, 152, 219, 0.05);
+    color: #2980b9;
+    border-left: 2px solid #2980b9;
+    padding-left: 1.2rem;
+}
+
+/* Button Effects */
+.btn {
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover::after {
+    transform: scaleY(1);
+}
+
+/* Product Cards */
+.product-card {
+    transition: all 0.3s cubic-bezier(0.3, 0, 0.3, 1);
+    border: 1px solid transparent;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: rgba(52, 152, 219, 0.1);
+}
+
+.product-image {
+    transition: transform 0.5s cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.03);
+}
+
+/* Category Cards */
+.category-card {
+    transition: all 0.4s cubic-bezier(0.3, 0, 0.3, 1);
+    position: relative;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:hover img {
+    transform: scale(1.03);
+    transition: transform 0.5s cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+.category-card-content {
+    transition: all 0.3s cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+/* Search Input */
+.search-container input {
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    border: 1px solid transparent;
+    background: #f8f9fa;
+}
+
+.search-container input:hover {
+    background: #fff;
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background: #fff;
+}
+
+/* Icon Buttons */
+.icon-btn {
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    position: relative;
+}
+
+.icon-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2980b9;
+    transform: scaleX(0);
+    transition: transform 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+.icon-btn:hover {
+    color: #2980b9;
+}
+
+.icon-btn:hover::after {
+    transform: scaleX(1);
+}
+
+/* Social Icons */
+.social-icons a {
+    transition: all 0.3s cubic-bezier(0.3, 0, 0.3, 1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.social-icons a:hover {
+    transform: translateY(-3px);
+    background: #2980b9;
+    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+}
+
+/* Review Cards */
+.review-card {
+    transition: all 0.3s cubic-bezier(0.3, 0, 0.3, 1);
+    border: 1px solid transparent;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(52, 152, 219, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Newsletter Form */
+.newsletter-form input {
+    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    border: 1px solid transparent;
+}
+
+.newsletter-form input:hover {
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Brand Logos */
+.brand-logo {
+    transition: all 0.3s cubic-bezier(0.3, 0, 0.3, 1);
+    opacity: 0.8;
+}
+
+.brand-logo:hover {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* Hero Section Animation */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    animation: slideInDown 1s ease-out;
+}
+
+.hero p {
+    animation: fadeIn 1s ease-out 0.5s both;
+}
+
+.hero .btn {
+    animation: slideInUp 1s ease-out 1s both;
+}
+
+/* Floating Animation for Cards */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Shine Effect */
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Product Card Advanced Animations */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: skewX(-25deg);
+}
+
+.product-card:hover::after {
+    animation: shine 1.5s ease-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Category Card Reveal Animation */
+.category-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card-content {
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.category-card:hover .category-card-content {
+    transform: translateY(0);
+}
+
+/* Navigation Dropdown Advanced Animation */
+.nav-item .dropdown-content {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.4s ease-out;
+}
+
+.nav-item:hover .dropdown-content {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Button Ripple Effect */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 1s;
+}
+
+.btn:active::after {
+    transform: scale(0, 0);
+    opacity: 0.3;
+    transition: 0s;
+}
+
+/* Search Input Animation */
+.search-container input {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 200px;
+}
+
+.search-container input:focus {
+    width: 250px;
+}
+
+/* Social Icons Advanced Animation */
+.social-icons a {
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icons a:hover::before {
+    transform: rotate(45deg) scale(1.5);
+}
+
+/* Newsletter Form Animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.newsletter-form input:invalid:focus {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Loading Animation for Images */
+@keyframes imageFadeIn {
+    from { opacity: 0; filter: blur(10px); }
+    to { opacity: 1; filter: blur(0); }
+}
+
+.product-image, .category-card img {
+    animation: imageFadeIn 0.5s ease-out;
+}
+
+/* Review Card Entrance Animation */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.review-card {
+    opacity: 0;
+}
+
+.review-card.animate {
+    animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.review-card {
+    opacity: 1; /* Make cards visible by default */
+    transform: translateX(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keep the hover animation */
+.review-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(52, 152, 219, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Optional: Add entrance animation when scrolled into view */
+.review-card.fade-in {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.review-card.fade-in.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Brand Logo Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.brand-logo:hover {
+    animation: pulse 1.5s infinite;
+}
+
+/* Cart Count Badge Animation */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.cart-count {
+    animation: bounce 1s ease infinite;
+}
+
+/* Scroll Reveal Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Button Base Styles Update */
+.btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 12px 30px;
+    background: #2c3e50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transform-origin: center;
+}
+
+/* Hover Animation */
+.btn {
+    animation: steadyFloat 2s ease-in-out infinite;
+}
+
+.btn:hover {
+    animation: moveLeftRight 0.6s ease-in-out;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Add shine effect on hover */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 100%
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    animation: shine 0.75s;
+}
+
+/* Define the left-right movement */
+@keyframes moveLeftRight {
+    0% {
+        transform: translateX(0) translateY(-2px);
+    }
+    25% {
+        transform: translateX(-3px) translateY(-2px);
+    }
+    75% {
+        transform: translateX(3px) translateY(-2px);
+    }
+    100% {
+        transform: translateX(0) translateY(-2px);
+    }
+}
+
+/* Subtle floating animation when not hovered */
+@keyframes steadyFloat {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+}
+
+/* Shine effect animation */
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+/* Add these styles for specific button types */
+.newsletter-form .btn {
+    margin-left: 10px;
+    background: #3498db;
+}
+
+.category-card .btn {
+    margin-top: 10px;
+    background: #2980b9;
+}
+
+.product-card .btn {
+    width: 100%;
+    margin-top: 10px;
+    background: #3498db;
+}
+
+/* Button states */
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* Make sure buttons look good on mobile */
+@media (max-width: 768px) {
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .newsletter-form .btn {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+/* Instagram Feed Section */
+.instagram-feed {
+    padding: 4rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.instagram-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.instagram-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.instagram-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.instagram-item:hover .instagram-overlay {
+    opacity: 1;
+}
+
+.instagram-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Brand Banner Section */
+.brand-banner {
+    padding: 3rem 1rem;
+    background: #2c3e50;
+    color: white;
+}
+
+.brand-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.brand-logo {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+
+/* Newsletter Section Responsiveness Fix */
+.newsletter-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+}
+
+@media (max-width: 576px) {
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+    }
+}
+.custom-alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.alert-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
+    position: relative;
+}
+
+.close-alert {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-alert:hover {
+    color: #e74c3c;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-50px); opacity: 0; }
+}
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-item > a {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Add arrow indicator for items with dropdowns */
+    .nav-item > a::after {
+        content: '\f107';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-left: 0.5rem;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #f8f9fa;
+        padding-left: 1rem;
+    }
+
+    /* Show dropdown when parent is clicked */
+    .nav-item.active > .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">LuxeWear</a>
+            
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#">Women</a>
+                    <div class="dropdown-content">
+                        <a href="women explore.html">New Arrivals</a>
+                        <a href="dresses.html">Dresses</a>
+                        <a href="tops.html">Tops</a>
+                        <a href="bottom.html">Bottoms</a>
+                        <a href="accessories.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Men</a>
+                    <div class="dropdown-content">
+                        <a href="menexplore.html">New Arrivals</a>
+                        <a href="shirts.html">Shirts</a>
+                        <a href="pants.html">Pants</a>
+                        <a href="suits.html">Suits</a>
+                        <a href="accessioriesmen.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Kids</a>
+                    <div class="dropdown-content">
+                        <a href="kidsdresses.html">Dreeses</a>
+                        <a href="kidsshirts.html">Shirts</a>
+                        <a href="kidspants.html">Pants</a>
+                        <a href="kidsshoes.html">Shoes</a>
+                        <a href="kidsaccessories.html">Accessories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Sale</a>
+                    <div class="dropdown-content">
+                        <a href="womensale.html">Women's Sale</a>
+                        <a href="mensale.html">Men's Sale</a>
+                        <a href="kidssale.html">Kids' Sale</a>
+                        <a href="clearance.html">Clearance</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="nav-icons">
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <a href="luxewear-login.html" class="icon-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+                <a href="cart-page.html" class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                   
+                </a>
+                
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Summer Collection 2025</h1>
+        <p>Discover the latest trends in fashion</p>
+        <a href="shopnow.html" class="btn">Shop Now</a>
+    </section>
+
+    <section class="categories">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="1.png" alt="Women's Fashion">
+                <div class="category-card-content">
+                    <h3>Women's Fashion</h3>
+                    <a href="women explore.html" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="360_F_250849890_qxH2MudfMq5AFSqHrOp5oA9NqykT14Ti.jpg" alt="Men's Fashion">
+                <div class="category-card-content">
+                    <h3>Men's Fashion</h3>
+                    <a href="menexplore.html" class="btn">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="dancing-team-studio.jpg" alt="Kids' Fashion">
+                <div class="category-card-content">
+                    <h3>Kids' Fashion</h3>
+                    <a href="kidsexplore.html" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="3.png" alt="Product 1" class="product-image">
+                <h3 class="product-title">Summer Dress</h3>
+                <p class="product-price">$59.99</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="product-card">
+                <img src="4.png" alt="Product 2" class="product-image">
+                <h3 class="product-title">Casual Shirt</h3>
+                <p class="product-price">$39.99</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="product-card">
+                <img src="5.png" alt="Product 3" class="product-image">
+                <h3 class="product-title">Denim Jeans</h3>
+                <p class="product-price">$79.99</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="product-card">
+                <img src="6.png" alt="Product 4" class="product-image">
+                <h3 class="product-title">Classic Watch</h3>
+                <p class="product-price">$129.99</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+        </div>
+    </section>
+    <section class="benefits">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fas fa-truck"></i>
+                <h3>Free Shipping</h3>
+                <p>On orders over $50</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-undo"></i>
+                <h3>Easy Returns</h3>
+                <p>30-day return policy</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Payment</h3>
+                <p>100% secure checkout</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team</p>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="reviews">
+        <h2 class="section-title">Customer Reviews</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="7.png" alt="Reviewer" class="reviewer-image">
+                    <div>
+                        <h4>Sarah Johnson</h4>
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                </div>
+                <p>"Absolutely love the quality of their clothes. The customer service is exceptional!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="Thompson-Michael-21-copy.jpg" alt="Reviewer" class="reviewer-image">
+                    <div>
+                        <h4>Mike Thompson</h4>
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                </div>
+                <p>"Great selection and fast shipping. Will definitely shop here again!"</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Instagram Feed -->
+    <section class="instagram-feed">
+        <h2 class="section-title">Follow Us on Instagram</h2>
+        <div class="instagram-grid">
+            <div class="instagram-item">
+                <img src="freepik--202502061440518LZ8.png" alt="Instagram Post">
+                <div class="instagram-overlay">
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <!-- [Repeat instagram-item 5 more times...] -->
+        </div>
+    </section>
+
+    <!-- Brand Banner -->
+    <section class="brand-banner">
+        <h2 class="section-title">Featured Brands</h2>
+        <div class="brand-grid">
+            <img src="Louis-Vuitton-logo.png" alt="Brand Logo" class="brand-logo">
+            <img src="Gucci-Logo.wine.png" alt="Brand Logo" class="brand-logo">
+            <img src="image-84-1024x576.png" alt="Brand Logo" class="brand-logo">
+            <img src="dior-logo-png-transparent.png" alt="Brand Logo" class="brand-logo">
+            <img src="prada-logo-png-transparent.png" alt="Brand Logo" class="brand-logo">
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Get the latest updates on new products and upcoming sales</p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="emailInput" placeholder="Enter your email" required>
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+    </section>
+    
+    <!-- Custom Alert Modal -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span class="close-alert">&times;</span>
+            <h3>Thank You!</h3>
+            <p>You have successfully subscribed to our newsletter.</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Fashion Store is your one-stop destination for trendy fashion. We offer the latest styles for everyone.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Shop Women</a></li>
+                    <li><a href="#">Shop Men</a></li>
+                    <li><a href="#">Shop Kids</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> + (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> support@LuxeWear.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Time Square, New York</p>
+                </div>
+                <div class="app-download">
+                    <a href="#" class="app-button">
+                        <i class="fab fa-apple"></i>
+                        <div>
+                            <small>Download on the</small>
+                            <div>App Store</div>
+                        </div>
+                    </a>
+                    <a href="#" class="app-button">
+                        <i class="fab fa-google-play"></i>
+                        <div>
+                            <small>Get it on</small>
+                            <div>Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 LuxeWear. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+    <script src="java.js"></script>
+    <script>const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+        const observerScript = `
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+        
+            document.querySelectorAll('.product-card, .category-card, .review-card, .benefit-card').forEach((el) => {
+                observer.observe(el);
+            });
+        `
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            // Add initial class for animation
+            reviewCards.forEach(card => {
+                card.classList.add('fade-in');
+            });
+        
+            // Create intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+        
+            // Observe each review card
+            reviewCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+        const newsletterForm = document.getElementById('newsletterForm');
+const emailInput = document.getElementById('emailInput');
+const customAlert = document.getElementById('customAlert');
+const closeAlert = document.querySelector('.close-alert');
+
+// Show the custom alert
+function showAlert() {
+    customAlert.style.display = 'flex';
+}
+
+// Hide the custom alert
+function hideAlert() {
+    customAlert.style.animation = 'slideOut 0.5s ease-out';
+    setTimeout(() => {
+        customAlert.style.display = 'none';
+    }, 500);
+}
+
+// Handle form submission
+newsletterForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    if (email && validateEmail(email)) {
+        showAlert();
+        emailInput.value = '';
+    } else {
+        alert('Please enter a valid email address.');
+    }
+});
+
+// Close the alert when the close button is clicked
+closeAlert.addEventListener('click', hideAlert);
+
+// Close the alert when clicking outside the modal
+customAlert.addEventListener('click', function (event) {
+    if (event.target === customAlert) {
+        hideAlert();
+    }
+});
+
+// Email validation function
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+// Mobile Navigation JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Toggle mobile menu
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Handle dropdown toggles on mobile
+    navItems.forEach(item => {
+        const link = item.querySelector('a');
+        const dropdown = item.querySelector('.dropdown-content');
+
+        if (dropdown) {
+            link.addEventListener('click', (e) => {
+                // Only prevent default and handle dropdown on mobile
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    
+                    // Close other open dropdowns
+                    navItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            navLinks.classList.remove('active');
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navLinks.classList.remove('active');
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+    });
+});
+
+
+</script>
+</body>
+</html>

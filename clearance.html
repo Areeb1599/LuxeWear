@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids' Clearance Sale | LuxeWear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .sale-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/api/placeholder/1920/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sale-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .sale-banner p {
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+
+        .countdown-timer {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .sale-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .stock-status {
+            font-size: 0.9rem;
+            color: #e67e22;
+            margin-top: 0.5rem;
+        }
+
+        .low-stock {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1.25rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            animation: buttonPulse 0.5s ease;
+        }
+
+        /* Footer styles */
+        .site-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color var(--transition-speed);
+        }
+
+
+        @media (max-width: 768px) {
+            .sale-banner h1 {
+                font-size: 2rem;
+            }
+            .sale-banner p {
+                font-size: 1.2rem;
+            }
+            .product-image {
+                height: 250px;
+            }
+        }
+        .site-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sale-banner">
+        <h1>Clearance Sale</h1>
+        <p>Up to 70% Off | Limited Time Only</p>
+        <div class="countdown-timer">
+            Sale Ends in: 72:00:00
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="products-grid">
+            <!-- Party Dress -->
+            <div class="product-card">
+                <span class="sale-badge">-70%</span>
+                <img src="39.png" alt="Kids Party Dress" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Denim Jacket</h3>
+                    <div class="price-container">
+                        <span class="original-price">$129.99</span>
+                        <span class="sale-price">$49.00</span>
+                    </div>
+                    <div class="stock-status low-stock">Only 3 Left!</div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Boys Casual Set -->
+            <div class="product-card">
+                <span class="sale-badge">-65%</span>
+                <img src="Untitled design.png" alt="Boys Casual Set" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Boys Casual Set</h3>
+                    <div class="price-container">
+                        <span class="original-price">$39.99</span>
+                        <span class="sale-price">$14.00</span>
+                    </div>
+                    <div class="stock-status">Limited Stock</div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Kids Sneakers -->
+            <div class="product-card">
+                <span class="sale-badge">-60%</span>
+                <img src="51cTyQldMbL.png" alt="Kids Sneakers" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Kids Sneakers</h3>
+                    <div class="price-container">
+                        <span class="original-price">$34.99</span>
+                        <span class="sale-price">$14.00</span>
+                    </div>
+                    <div class="stock-status">In Stock</div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Girls Summer Dress -->
+            <div class="product-card">
+                <span class="sale-badge">-70%</span>
+                <img src="35.png" alt="Girls Summer Dress" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Chunky Knit Cardigan</h3>
+                    <div class="price-container">
+                        <span class="original-price">$119.99</span>
+                        <span class="sale-price">$73.50</span>
+                    </div>
+                    <div class="stock-status low-stock">Last Few Items!</div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">Shop</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <div class="footer-links">
+                    <a href="#">Shipping</a>
+                    <a href="#">Returns</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Size Guide</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 LuxeWear. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateTimer() {
+            const timer = document.querySelector('.countdown-timer');
+            let [hours, minutes, seconds] = timer.textContent.match(/\d+/g).map(Number);
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 48; // Reset to 48 hours
+                        }
+                    }
+                }
+                timer.textContent = `Sale Ends in: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
+        });
+
+        // Initialize countdown
+        updateTimer();
+    </script>
+</body>
+</html>

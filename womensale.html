@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Sale | LuxeWear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .sale-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/api/placeholder/1920/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sale-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .sale-banner p {
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+        }
+
+        .filter-section {
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .sale-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1.25rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            animation: buttonPulse 0.5s ease;
+        }
+
+        .site-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sale-banner h1 {
+                font-size: 2rem;
+            }
+            .sale-banner p {
+                font-size: 1.2rem;
+            }
+            .product-image {
+                height: 250px;
+            }
+        }
+        .site-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color var(--transition-speed);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sale-banner">
+        <h1>Women's Sale</h1>
+        <p>Up to 50% Off | Limited Time Only</p>
+    </div>
+
+    <div class="container">
+
+        <div class="products-grid">
+            <!-- Evening Gown -->
+            <div class="product-card">
+                <span class="sale-badge">-40%</span>
+                <img src="11.png" alt="Elegant Evening Gown" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Elegant Evening Gown</h3>
+                    <div class="price-container">
+                        <span class="original-price">$199.99</span>
+                        <span class="sale-price">$119.99</span>
+                    </div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Designer High Heels -->
+            <div class="product-card">
+                <span class="sale-badge">-35%</span>
+                <img src="12.png" alt="Designer High Heels" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Designer High Heels</h3>
+                    <div class="price-container">
+                        <span class="original-price">$149.99</span>
+                        <span class="sale-price">$97.49</span>
+                    </div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Summer Blazer -->
+            <div class="product-card">
+                <span class="sale-badge">-30%</span>
+                <img src="13.png" alt="Lightweight Summer Blazer" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Lightweight Summer Blazer</h3>
+                    <div class="price-container">
+                        <span class="original-price">$109.99</span>
+                        <span class="sale-price">$76.99</span>
+                    </div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Beach Dress -->
+            <div class="product-card">
+                <span class="sale-badge">-45%</span>
+                <img src="15.png" alt="Flowy Beach Dress" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Flowy Beach Dress</h3>
+                    <div class="price-container">
+                        <span class="original-price">$69.99</span>
+                        <span class="sale-price">$38.49</span>
+                    </div>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Continue with more products... -->
+            <!-- Additional product cards would follow the same pattern -->
+        </div>
+    </div>
+    <footer class="site-footer">
+        <!-- Footer content remains the same as your original -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">Shop</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <div class="footer-links">
+                    <a href="#">Shipping</a>
+                    <a href="#">Returns</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Size Guide</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 LuxeWear. All Rights Reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

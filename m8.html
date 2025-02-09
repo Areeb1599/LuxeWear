@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Page | LuxeWear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: clamp(1rem, 3vw, 2rem);
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: grid;
+            place-items: center;
+        }
+
+        .product-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: clamp(8px, 2vw, 12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: min(100%, 600px);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 3vw, 1.5rem);
+            color: #2c3e50;
+            animation: fadeIn 0.5s ease-out;
+            margin: clamp(2rem, 5vh, 4rem) auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-image {
+            width: 100%;
+         
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .section-title {
+            font-size: clamp(14px, 3vw, 16px);
+            margin-bottom: clamp(0.5rem, 2vw, 0.75rem);
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .color-options, .size-options {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            flex-wrap: wrap;
+        }
+
+        .color-option, .size-option {
+            position: relative;
+        }
+
+        .color-option input, .size-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .color-label {
+            display: inline-block;
+            width: clamp(32px, 8vw, 40px);
+            height: clamp(32px, 8vw, 40px);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-label[data-color="blue"] { background-color: #3498db; }
+        .color-label[data-color="black"] { background-color: #2c3e50; }
+        .color-label[data-color="red"] { background-color: #e74c3c; }
+        .color-label[data-color="grey"] { background-color: #95a5a6; }
+
+        .color-option input:checked + .color-label {
+            border-color: #2c3e50;
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2c3e50;
+        }
+
+        .size-label {
+            display: inline-block;
+            padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: clamp(12px, 3vw, 14px);
+            min-width: clamp(60px, 15vw, 80px);
+            text-align: center;
+        }
+
+        .size-option input:checked + .size-label {
+            background-color: #2c3e50;
+            color: #ffffff;
+            border-color: #2c3e50;
+        }
+
+        .quantity-input {
+            width: 100%;
+            padding: clamp(0.5rem, 2vw, 0.75rem);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #2c3e50;
+            font-size: clamp(14px, 3vw, 16px);
+            transition: all 0.3s;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: clamp(0.75rem, 2.5vw, 0.875rem);
+            background-color: #2c3e50;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: clamp(14px, 3vw, 16px);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-home {
+            position: fixed;
+            top: clamp(10px, 3vw, 20px);
+            left: clamp(10px, 3vw, 20px);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(12px, 3vw, 14px);
+            transition: all 0.3s;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .back-to-home:hover {
+            transform: translateX(-5px);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .color-label, .size-label {
+                padding: clamp(12px, 3vw, 15px) clamp(16px, 4vw, 20px);
+            }
+            
+            .add-to-cart-btn {
+                padding: clamp(1rem, 3vw, 1.25rem);
+            }
+        }
+
+        /* Small screens */
+        @media (max-width: 480px) {
+            .product-container {
+                margin: 1rem auto;
+                padding: 1.25rem;
+            }
+
+            .color-options, .size-options {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .size-label {
+                min-width: 70px;
+            }
+        }
+
+        /* Medium screens */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .product-container {
+                margin: 2rem auto;
+            }
+
+            .color-options, .size-options {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Support for dark mode */
+        @media (prefers-color-scheme: dark) {
+            .product-container {
+                background-color: rgba(44, 62, 80, 0.95);
+                color: #ecf0f1;
+            }
+
+            .section-title {
+                color: #ecf0f1;
+            }
+
+            .size-label {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ecf0f1;
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .size-option input:checked + .size-label {
+                background-color: #3498db;
+                border-color: #3498db;
+            }
+
+            .quantity-input {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ecf0f1;
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .add-to-cart-btn {
+                background-color: #3498db;
+            }
+
+            .add-to-cart-btn:hover {
+                background-color: #2980b9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+
+    <div class="product-container">
+        <img src="33.png" alt="Product Image" class="product-image">
+        
+        <div>
+            <h2 class="section-title">Select Color</h2>
+            <div class="color-options">
+                <div class="color-option">
+                    <input type="radio" id="blue" name="color" value="blue">
+                    <label for="blue" class="color-label" data-color="blue"></label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="black" name="color" value="black">
+                    <label for="black" class="color-label" data-color="black"></label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="red" name="color" value="red">
+                    <label for="red" class="color-label" data-color="red"></label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="grey" name="color" value="grey">
+                    <label for="grey" class="color-label" data-color="grey"></label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="section-title">Select Size</h2>
+            <div class="size-options">
+                <div class="size-option">
+                    <input type="radio" id="small" name="size" value="small">
+                    <label for="small" class="size-label">Small</label>
+                </div>
+                <div class="size-option">
+                    <input type="radio" id="medium" name="size" value="medium">
+                    <label for="medium" class="size-label">Medium</label>
+                </div>
+                <div class="size-option">
+                    <input type="radio" id="large" name="size" value="large">
+                    <label for="large" class="size-label">Large</label>
+                </div>
+                <div class="size-option">
+                    <input type="radio" id="customize" name="size" value="customize">
+                    <a href="./custom-size-page.html" class="size-label" title="Custom Size">Custom</a>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="section-title">Quantity</h2>
+            <input type="number" min="1" max="10" class="quantity-input" placeholder="Enter quantity">
+        </div>
+
+        <a href="./cart-page.html" style="width: 100%;">
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </a>
+    </div>
+</body>
+</html>

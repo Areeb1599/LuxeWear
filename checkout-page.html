@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: clamp(10px, 3vw, 20px);
+            color: #2c3e50;
+        }
+
+        .checkout-container {
+            max-width: min(1200px, 95vw);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-form, .order-summary {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: clamp(1rem, 4vw, 2rem);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            margin-bottom: clamp(1rem, 3vw, 1.5rem);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+        }
+
+        .form-section {
+            margin-bottom: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-size: clamp(13px, 2vw, 14px);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: clamp(0.75rem, 2vw, 0.875rem);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #2c3e50;
+            font-size: clamp(14px, 2vw, 15px);
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            position: relative;
+        }
+
+        .payment-method input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .payment-method label {
+            display: block;
+            padding: clamp(0.75rem, 2vw, 1rem);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: clamp(13px, 2vw, 14px);
+        }
+
+        .payment-method input:checked + label {
+            border-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.05);
+            color: #3498db;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ddd;
+            align-items: center;
+        }
+
+        .item-image {
+            width: clamp(50px, 10vw, 60px);
+            height: clamp(50px, 10vw, 60px);
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+            font-size: clamp(14px, 2vw, 16px);
+        }
+
+        .item-variants {
+            font-size: clamp(12px, 2vw, 14px);
+            color: #666;
+        }
+
+        .item-price {
+            font-weight: 500;
+            font-size: clamp(14px, 2vw, 16px);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            color: #666;
+            font-size: clamp(14px, 2vw, 16px);
+        }
+
+        .summary-row.total {
+            color: #2c3e50;
+            font-size: clamp(16px, 3vw, 1.25rem);
+            font-weight: 600;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .confirm-button {
+            width: 100%;
+            padding: clamp(0.875rem, 2vw, 1rem);
+            background-color: #2c3e50;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: clamp(14px, 2vw, 16px);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confirm-button:hover {
+            background-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-cart {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+            font-size: clamp(13px, 2vw, 14px);
+            font-weight: 500;
+            padding: 0.5rem 0;
+        }
+
+        .back-to-cart:hover {
+            color: #3498db;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: clamp(1.5rem, 4vw, 2rem);
+            border-radius: 8px;
+            text-align: center;
+            max-width: min(400px, 90vw);
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-icon {
+            font-size: clamp(2.5rem, 6vw, 3rem);
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cart-item {
+                grid-template-columns: 50px 1fr;
+            }
+
+            .item-price {
+                grid-column: 2;
+                justify-self: end;
+            }
+
+            .form-input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+        @media (hover: none) {
+            .payment-method label,
+            .confirm-button,
+            .back-to-cart {
+                min-height: 44px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .checkout-container,
+            .modal-content {
+                animation: none;
+            }
+
+            .confirm-button:hover {
+                transform: none;
+            }
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 20px;
+            }
+
+            .checkout-container {
+                box-shadow: none;
+            }
+
+            .confirm-button,
+            .back-to-cart {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <!-- Checkout Form -->
+        <div class="checkout-form">
+            <form id="checkoutForm">
+                <!-- Shipping Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Shipping Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Postal Code</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Payment Method</h2>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="easypaisa" name="payment" value="easypaisa" required>
+                            <label for="easypaisa">Easy Paisa</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="jazzcash" name="payment" value="jazzcash">
+                            <label for="jazzcash">Jazz Cash</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="bank" name="payment" value="bank">
+                            <label for="bank">Bank Transfer</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="confirm-button">Confirm Order</button>
+                <a href="./cart-page.html" class="back-to-cart">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Cart
+                </a>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2 class="section-title">Order Summary</h2>
+            
+            <!-- Sample Cart Items -->
+            <div class="cart-item">
+                <img src="2.png" alt="Product 1" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Classic Business Suit</div>
+                    <div class="item-variants">Blue • Medium • Qty: 2</div>
+                </div>
+                <div class="item-price">$399.99</div>
+            </div>
+
+            <div class="cart-item">
+                <img src="32.png" alt="Product 2" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">Chino Pants</div>
+                    <div class="item-variants">Black • 32 • Qty: 1</div>
+                </div>
+                <div class="item-price">$59.99</div>
+            </div>
+
+            <!-- Summary Details -->
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>$189.96</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>$5.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Tax</span>
+                <span>$19.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>$213.96</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>Order Confirmed!</h2>
+            <p>Your order has been successfully placed. Thanks for shopping with LuxeWear!</p>
+            <p>Order number: #ORDER123</p>
+            <button class="confirm-button" onclick="window.location.href='#'">Continue Shopping</button>
+        </div>
+    </div>
+</body>
+</html>

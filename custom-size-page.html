@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            padding: clamp(10px, 5vw, 20px);
+        }
+
+        .custom-size-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: clamp(4px, 1vw, 8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: min(90vw, 600px);
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 3vw, 1.5rem);
+            color: #2c3e50;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: clamp(20px, 5vw, 24px);
+            color: #2c3e50;
+            margin-bottom: clamp(0.5rem, 2vw, 1rem);
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .measurement-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(0.75rem, 2vw, 1rem);
+        }
+
+        .measurement-item {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.25rem, 1vw, 0.5rem);
+        }
+
+        .measurement-label {
+            font-size: clamp(12px, 3vw, 14px);
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .measurement-input {
+            width: 100%;
+            padding: clamp(0.5rem, 2vw, 0.75rem);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #2c3e50;
+            font-size: clamp(14px, 3vw, 16px);
+            transition: all 0.3s;
+        }
+
+        .measurement-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .measurement-note {
+            font-size: clamp(12px, 2.5vw, 14px);
+            color: #95a5a6;
+            margin-top: 0.25rem;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-top: clamp(0.75rem, 2vw, 1rem);
+            flex-direction: row;
+        }
+
+        .button {
+            flex: 1;
+            padding: clamp(0.75rem, 2vw, 0.875rem);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(14px, 3vw, 16px);
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .save-btn {
+            background-color: #2c3e50;
+            color: #ffffff;
+        }
+
+        .back-btn {
+            background-color: #95a5a6;
+            color: #ffffff;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .save-btn:hover {
+            background-color: #34495e;
+        }
+
+        .back-btn:hover {
+            background-color: #7f8c8d;
+        }
+
+        .measurement-guide {
+            text-align: center;
+            margin-top: clamp(0.75rem, 2vw, 1rem);
+        }
+
+        .guide-link {
+            color: #3498db;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            font-size: clamp(12px, 3vw, 14px);
+        }
+
+        .guide-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3498db;
+            transition: width 0.3s;
+        }
+
+        .guide-link:hover::after {
+            width: 100%;
+        }
+
+        .back-to-home {
+            position: fixed;
+            top: clamp(10px, 3vw, 20px);
+            left: clamp(10px, 3vw, 20px);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(12px, 3vw, 14px);
+            transition: all 0.3s;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: clamp(0.5rem, 1vw, 0.75rem);
+            border-radius: 4px;
+            z-index: 1000;
+        }
+
+        .back-to-home:hover {
+            transform: translateX(-5px);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        @media (max-width: 480px) {
+            .buttons-container {
+                flex-direction: column-reverse;
+            }
+
+            .measurement-input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .custom-size-container {
+                margin-top: 60px; /* Space for fixed back button */
+            }
+        }
+
+        @media (max-height: 700px) {
+            body {
+                align-items: flex-start;
+                padding-top: 60px;
+            }
+        }
+
+        /* Add touch-friendly targets for mobile */
+        @media (hover: none) {
+            .button, .measurement-input, .guide-link {
+                min-height: 44px;
+            }
+        }
+
+        /* Adjust for larger screens */
+        @media (min-width: 1200px) {
+            .custom-size-container {
+                max-width: 800px;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .measurement-note {
+                color: #666;
+            }
+            
+            .custom-size-container {
+                background-color: #fff;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .custom-size-container {
+                animation: none;
+            }
+            
+            .button:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+
+    <div class="custom-size-container">
+        <h1 class="page-title">Custom Size Measurements</h1>
+        
+        <div class="measurement-group">
+            <div class="measurement-item">
+                <label class="measurement-label" for="chest">Chest (cm)</label>
+                <input type="number" id="chest" class="measurement-input" placeholder="e.g., 92">
+                <span class="measurement-note">Measure around the fullest part</span>
+            </div>
+            
+            <div class="measurement-item">
+                <label class="measurement-label" for="waist">Waist (cm)</label>
+                <input type="number" id="waist" class="measurement-input" placeholder="e.g., 76">
+                <span class="measurement-note">Measure at natural waistline</span>
+            </div>
+            
+            <div class="measurement-item">
+                <label class="measurement-label" for="hips">Hips (cm)</label>
+                <input type="number" id="hips" class="measurement-input" placeholder="e.g., 96">
+                <span class="measurement-note">Measure at widest point</span>
+            </div>
+            
+            <div class="measurement-item">
+                <label class="measurement-label" for="length">Length (cm)</label>
+                <input type="number" id="length" class="measurement-input" placeholder="e.g., 65">
+                <span class="measurement-note">Measure from shoulder to desired length</span>
+            </div>
+            
+            <div class="measurement-item">
+                <label class="measurement-label" for="shoulders">Shoulders (cm)</label>
+                <input type="number" id="shoulders" class="measurement-input" placeholder="e.g., 42">
+                <span class="measurement-note">Measure shoulder point to point</span>
+            </div>
+            
+            <div class="measurement-item">
+                <label class="measurement-label" for="sleeve">Sleeve Length (cm)</label>
+                <input type="number" id="sleeve" class="measurement-input" placeholder="e.g., 60">
+                <span class="measurement-note">Measure from shoulder to wrist</span>
+            </div>
+        </div>
+
+        <div class="measurement-guide">
+            <a href="#measurement-guide" class="guide-link">Need help? View measurement guide</a>
+        </div>
+
+        <div class="buttons-container">
+            <a href="#" class="button back-btn">Back to Product</a>
+            <a href="#"><button class="button save-btn">Save Measurements</button></a>
+        </div>
+    </div>
+</body>
+</html>
